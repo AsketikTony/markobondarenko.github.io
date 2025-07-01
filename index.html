@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Поддержать Марк Бондаренко</title>
+  <style>
+    :root {
+      --main-orange: #ff5a2e;
+      --main-bg: #fff;
+      --card-bg: #fff;
+      --card-border: #efefef;
+      --btn-copy-bg: #eaf1ff;
+      --btn-copy-hover: #dbe5fb;
+      --btn-action: var(--main-orange);
+      --btn-action-hover: #1d1d1d;
+      --btn-action-color: #fff;
+      --border-radius: 17px;
+      --transition: .17s cubic-bezier(.4,1.3,.6,1);
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+    body {
+      background: var(--main-bg);
+      color: #222222;
+      font-family: var(--font-family);
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    /* ==================== БАННЕР С ФОТО И ИМЕНЕМ ==================== */
+    .top-banner {
+      position: relative;
+      width: 100vw;
+      max-width: 100%;
+      min-height: 120px;
+      background: url('BG.jpg') center/cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0;
+      overflow: hidden;
+      height: 200px;
+      border-bottom: 6px solid #fff;
+    }
+    .banner-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      justify-content: center;
+      height: 100%;
+      min-height: 100px;
+      position: relative;
+      z-index: 3;
+    }
+    .photo-circle {
+      width: 120px;
+      height: 120px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid #ff5a2e;
+      box-shadow: 0 0 22px #000a, 0 3px 14px #ff8d1b33;
+      background: #181818;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      margin-top: 20px;
+      z-index: 2;
+      
+    }
+    .photo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 50%;
+      display: block;
+      aspect-ratio: 1/1;
+      background: #222;
+    }
+    .headline-marko {
+      position: relative;
+      bottom: 15px; /* регулируешь высоту */
+      
+      font-size: 2.05em;
+      font-weight: 900;
+      color: #fff;
+      margin: 0;
+      letter-spacing: 1.7px;
+      /* Glow effect only! */
+      text-shadow:
+
+    0 0 32px #d34300,
+    0 2px 8px #ffb174,
+    0 0 2px #ff5000,
+    0 0 1px #fff9;
+      display: inline-block;
+      transition:
+        color .17s,
+        text-shadow .17s,
+        -webkit-text-stroke .17s;
+      cursor: pointer;
+      border: none;
+      background: none;
+      padding: 0;
+      /* No border-radius or bg */
+      user-select: none;
+    }
+    .headline-marko:hover {
+      color: var(--main-orange);
+      /* Белый glow + белая обводка по буквам */
+      text-shadow:
+        0 0 30px #fff,
+        0 3px 8px #fff5fb,
+        0 0 1px #ffbb;
+    }
+    /* Для браузеров без text-stroke (на всякий) */
+    @supports not (-webkit-text-stroke: 2px #fff) {
+      .headline-marko:hover {
+        filter: drop-shadow(0 0 4px #fff);
+      }
+    }
+    /* =========================== END =========================== */
+
+    /* ==================== КНОПКА "ПОДДЕРЖАТЬ" И МИГАЮЩИЕ ТОЧКИ ==================== */
+    .support-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 18px;
+      margin-top: 16px;
+      margin-bottom: 22px;
+    }
+    .dot-blink {
+      width: 17px; height: 17px; border-radius: 50%;
+      display: inline-block;
+      background: #39ea41;
+      box-shadow: 0 0 12px 4px #39ea4177, 0 0 2px #fff;
+      border: 2.5px solid #fff;
+      animation: blink 1.5s infinite;
+      vertical-align: middle;
+    }
+    @keyframes blink { 0%, 60% { opacity: 1; } 85% { opacity: 0.1; } 100% { opacity: 1; } }
+    .support-title {
+      font-size: 2.1em;
+      font-weight: 900;
+      color: var(--main-orange);
+      letter-spacing: 1.4px;
+      margin: 0 8px;
+      text-shadow: 0 0 15px #ffffffbb, 0 2px 8px #fff2;
+      background: #fff;
+      border-radius: 10px;
+      padding: 0 24px;
+      display: inline-block;
+    }
+    /* =========================== END =========================== */
+
+    /* ======= Остальные стили оставь как есть (не меняю) ======= */
+
+    .donate-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      justify-content: center;
+      align-items: stretch;
+      max-width: 700px;
+      margin: 0 auto 0 auto;
+    }
+    .donate-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 12px #ececec;
+      min-width: 260px;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 0 18px 0 10px;
+      cursor: pointer;
+      transition: box-shadow var(--transition), border-color var(--transition), background var(--transition);
+      outline: none;
+      position: relative;
+      text-align: left;
+      text-decoration: none;
+      font-weight: 400;
+      user-select: none;
+    }
+    .donate-btn:hover, .donate-btn:focus {
+      background: var(--main-orange);
+      color: #fff;
+      border-color: var(--main-orange);
+      box-shadow: 0 8px 32px #ff5a2e19;
+    }
+    .donate-btn img {
+      width: 48px; height: 48px;
+      object-fit: contain;
+      border-radius: 11px;
+      background: #f9f9f9;
+      padding: 3.5px;
+      border: 1px solid #eee;
+      box-shadow: 0 2px 7px #eee2;
+      flex-shrink: 0;
+      transition: background .14s;
+    }
+    .donate-btn .btn-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      justify-content: center;
+    }
+    .donate-btn .donate-title {
+      font-size: 1.17em;
+      font-weight: 600;
+      margin-bottom: 0;
+      transition: color var(--transition);
+      color: #232323;
+    }
+    .donate-btn .donate-value {
+      font-size: 1.08em;
+      font-weight: 400;
+      color: #232323;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color var(--transition);
+      word-break: break-all;
+    }
+    .donate-btn:hover .donate-title, .donate-btn:focus .donate-title,
+    .donate-btn:hover .donate-value, .donate-btn:focus .donate-value {
+      color: #fff;
+    }
+    /* Кнопка копировать */
+    .copy-icon-btn {
+      background: var(--btn-copy-bg);
+      border: none;
+      border-radius: 6px;
+      padding: 4px 7px 4px 7px;
+      margin-left: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      transition: background var(--transition);
+      outline: none;
+    }
+    .copy-icon-btn:hover, .copy-icon-btn:focus {
+      background: var(--btn-copy-hover);
+    }
+    .copy-icon-btn svg {
+      width: 22px; height: 22px;
+      display: block;
+      fill: #3375d6;
+      transition: fill 0.13s;
+    }
+    .copy-icon-btn:active svg,
+    .copy-icon-btn.copied svg {
+      fill: #1e3a6f;
+    }
+    /* USDT */
+    .usdt-row {
+      display: flex;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      max-width: 700px;
+      margin-top: 20px;
+    }
+    .usdt-btn {
+      background: var(--card-bg);
+      border: 2px solid var(--card-border);
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 12px #ececec;
+      min-width: 0;
+      width: 100%;
+      min-height: 110px;
+      display: flex;
+      align-items: center;
+      gap: 19px;
+      padding: 0 26px 0 12px;
+      cursor: pointer;
+      transition: box-shadow var(--transition), border-color var(--transition), background var(--transition);
+      outline: none;
+      position: relative;
+      text-align: left;
+      text-decoration: none;
+      font-weight: 400;
+      user-select: none;
+    }
+    .usdt-btn img { width: 54px; height: 54px; object-fit: contain; border-radius: 11px; background: #f9f9f9; padding: 3.5px; border: 1px solid #eee; box-shadow: 0 2px 7px #eee2; flex-shrink: 0;}
+    .usdt-btn .btn-content { flex: 1; display: flex; flex-direction: column; gap: 6px; justify-content: center;}
+    .usdt-btn .donate-title { font-size: 1.17em; font-weight: 600; margin-bottom: 0; transition: color var(--transition);}
+    .usdt-btn .donate-value { font-size: 1.08em; font-weight: 400; color: #232323; display: flex; align-items: center; gap: 6px; transition: color var(--transition);}
+    .usdt-btn:hover, .usdt-btn:focus { background: var(--main-orange); color: #fff; border-color: var(--main-orange); box-shadow: 0 8px 32px #ff5a2e19;}
+    .usdt-btn:hover .donate-title, .usdt-btn:focus .donate-title, .usdt-btn:hover .donate-value, .usdt-btn:focus .donate-value { color: #fff;}
+
+    /* === ПОДПИШИСЬ === */
+    .subscribe-section {
+      margin: 55px auto 0 auto;
+      padding: 34px 10px 18px 10px;
+      max-width: 830px;
+      background: #eeeeee;
+      border-radius: 23px;
+      box-shadow: 0 1px 18px #ececec;
+      text-align: center;
+      stroke: 
+    }
+    .subscribe-title { font-size: 2.2em; font-weight: 700; margin-bottom: 33px; margin-top: 3px; letter-spacing: 2.5px; }
+    .subscribe-btns { display: flex; flex-direction: column; gap: 17px; align-items: center; margin-bottom: 28px; }
+    .subscribe-btn {
+      width: 92%; max-width: 470px;
+      font-size: 1.27em;
+      background: #fff; color: #232323;
+      border: 2px solid #eee;
+      border-radius: 12px;
+      padding: 17px 0;
+      margin: 0 auto;
+      text-align: center;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition), border-color var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      font-weight: 400;
+      box-shadow: 0 1px 8px #e2e2e2;
+      outline: none;
+      letter-spacing: 0.04em;
+      display: block;
+      position: relative;
+      user-select: none;
+    }
+    .subscribe-btn:hover, .subscribe-btn:focus {
+      background: var(--btn-action);
+      color: #fff;
+      border-color: var(--btn-action);
+      box-shadow: 0 6px 22px #ff5a2e22;
+      text-decoration: none;
+    }
+    .slava-row-space { height: 38px; }
+    .slava-title {
+      margin-top: 0px;
+      font-size: 2.0em;
+      color: #ff2d28;
+      font-weight: 900;
+      text-shadow: 0 0 22px #ffbebe, 0 2px 4px #fff;
+      transition: text-shadow .13s, color .13s;
+      cursor: pointer;
+      letter-spacing: 1.5px;
+      user-select: none;
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 0 28px 0;
+    }
+    .slava-title:hover, .slava-title:active {
+      color: #fff;
+      text-shadow: 0 0 40px #ff2d28, 0 0 10px #ff6464, 0 2px 7px #fff;
+    }
+    @media (max-width: 900px) {
+      .donate-grid, .usdt-row { grid-template-columns: 1fr !important; max-width: 99vw; }
+      .donate-btn, .usdt-btn { width: 99vw; }
+      .banner-inner { flex-direction: column; align-items: center; justify-content: center; }
+      .headline-marko { margin-left: 0; margin-top: 14px;}
+      .photo-circle { margin-left: 0; }
+      .top-banner { height: 220px; min-height: 100px;}
+    }
+    @media (max-width: 700px) {
+      .top-banner .headline-marko { font-size: 1.15em; }
+      .photo-circle { width: 68px; height: 68px; }
+      .banner-inner { padding-top: 0;}
+      .donate-grid, .usdt-row { grid-template-columns: 1fr !important; max-width: 99vw; }
+      .donate-btn, .usdt-btn { width: 99vw; }
+      .subscribe-section { max-width: 99vw; }
+      .top-banner { height: 120px; min-height: 70px;}
+    }
+  </style>
+  <script>
+    function copyText(text, btnId) {
+      navigator.clipboard.writeText(text).then(function() {
+        var btn = document.getElementById(btnId);
+        btn.classList.add('copied');
+        setTimeout(function(){ btn.classList.remove('copied'); }, 900);
+      });
+    }
+  </script>
+</head>
+<body>
+<!-- ==================== БАННЕР С ФОТО И ИМЕНЕМ ==================== -->
+  <div class="top-banner">
+    <div class="banner-inner">
+      <div class="photo-circle">
+        <img src="main.jpg" alt="Марк Бондаренко">
+      </div>
+      <div class="headline-marko" >Марк Бондаренко</div>
+    </div>
+  </div>
+<!-- =========================== END =========================== -->
+
+<!-- ==================== КНОПКА "ПОДДЕРЖАТЬ" И МИГАЮЩИЕ ТОЧКИ ==================== -->
+  <div class="support-row">
+    <span class="dot-blink"></span>
+    <span class="support-title">ПОДДЕРЖАТЬ</span>
+    <span class="dot-blink"></span>
+  </div>
+<!-- =========================== END =========================== -->
+
+<!-- ==================== ДОНАТНЫЕ КАРТОЧКИ ==================== -->
+  <div class="donate-grid">
+    <a class="donate-btn" href="https://www.donationalerts.com/r/marko_bondarenko" target="_blank">
+      <img src="donation_alerts.svg" alt="DonationAlerts">
+      <div class="btn-content">
+        <div class="donate-title">Donation Alerts</div>
+      </div>
+    </a>
+    <a class="donate-btn" href="https://new.donatepay.ru/en/@marko_bondarenko" target="_blank">
+      <img src="donatepay.svg" alt="DonatePay">
+      <div class="btn-content">
+        <div class="donate-title">DonatePay</div>
+      </div>
+    </a>
+    <div class="donate-btn" tabindex="0" style="cursor:default;">
+      <img src="privat24.svg" alt="Privat24">
+      <div class="btn-content">
+        <div class="donate-title">Приват24 (грн)</div>
+        <div class="donate-value">
+          5363 5421 1165 2666
+          <button class="copy-icon-btn" id="btn-privat" onclick="copyText('5363 5421 1165 2666','btn-privat')" title="Копировать">
+            <svg viewBox="0 0 24 24"><rect x="7" y="7" width="13" height="13" rx="3" fill="#3375d6" opacity="0.18"/><rect x="3" y="3" width="13" height="13" rx="3" stroke="#3375d6" stroke-width="2" fill="none"/><rect x="7" y="7" width="13" height="13" rx="3" stroke="#3375d6" stroke-width="2" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="donate-btn" tabindex="0" style="cursor:default;">
+      <img src="paypal.svg" alt="PayPal">
+      <div class="btn-content">
+        <div class="donate-title">PayPal</div>
+        <div class="donate-value" style="word-break:break-all;">
+          markobond1980@gmail.com
+          <button class="copy-icon-btn" id="btn-paypal" onclick="copyText('markobond1980@gmail.com','btn-paypal')" title="Копировать">
+            <svg viewBox="0 0 24 24"><rect x="7" y="7" width="13" height="13" rx="3" fill="#3375d6" opacity="0.18"/><rect x="3" y="3" width="13" height="13" rx="3" stroke="#3375d6" stroke-width="2" fill="none"/><rect x="7" y="7" width="13" height="13" rx="3" stroke="#3375d6" stroke-width="2" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- =========================== END =========================== -->
+
+<!-- ==================== USDT КАРТОЧКА ==================== -->
+  <div class="usdt-row">
+    <div class="usdt-btn" tabindex="0" style="cursor:default;">
+      <img src="usdt.svg" alt="USDT TRC20">
+      <div class="btn-content">
+        <div class="donate-title">USDT TRC20</div>
+        <div class="donate-value">
+          TVuoVfDvRW9r4ScAV2rMsbM1TgeGRCq8RF
+          <button class="copy-icon-btn" id="btn-usdt" onclick="copyText('TVuoVfDvRW9r4ScAV2rMsbM1TgeGRCq8RF','btn-usdt')" title="Копировать">
+            <svg viewBox="0 0 24 24"><rect x="7" y="7" width="13" height="13" rx="3" fill="#3375d6" opacity="0.18"/><rect x="3" y="3" width="13" height="13" rx="3" stroke="#3375d6" stroke-width="2" fill="none"/><rect x="7" y="7" width="13" height="13" rx="3" stroke="#3375d6" stroke-width="2" fill="none"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- =========================== END =========================== -->
+
+<!-- ==================== ПОДПИШИСЬ - РАМКА ==================== -->
+  <div class="subscribe-section">
+    <div class="subscribe-title">ПОДПИШИСЬ</div>
+    <div class="subscribe-btns">
+      <a class="subscribe-btn" href="https://t.me/tribute/app?startapp=sdGq" target="_blank">Наша мужская приватка</a>
+      <a class="subscribe-btn" href="https://t.me/mark88bondarenko" target="_blank">Наш канал в Telegram</a>
+      <a class="subscribe-btn" href="https://t.me/mark_asket" target="_blank">Личные консультации</a>
+      <a class="subscribe-btn" href="https://www.instagram.com/markbondarenko88" target="_blank">Instagram</a>
+      <a class="subscribe-btn" href="https://www.tiktok.com/@markbondarenko88" target="_blank">TikTok</a>
+      <a class="subscribe-btn" href="https://www.youtube.com/@hraniteli_konov" target="_blank">Ценнейший архив видео!</a>
+      <a class="subscribe-btn" href="https://www.youtube.com/@MarkBondarenko88" target="_blank">Основной YouTube канал</a>
+    </div>
+  </div>
+<!-- =========================== END =========================== -->
+
+<!-- ==================== СЛАВА РОДУ - ВНЕ РАМКИ ==================== -->
+  <div class="slava-row-space"></div>
+  <div class="slava-title">Слава роду!</div>
+  <div class="slava-row-space"></div>
+<!-- =========================== END =========================== -->
+
+</body>
+</html>
